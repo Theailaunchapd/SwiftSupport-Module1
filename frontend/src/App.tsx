@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import kareveLogo from './assets/kareve-logo.svg';
 
 const App: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -20,7 +21,10 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <form onSubmit={handleLogin} className="bg-white p-8 rounded shadow-md">
-        <h1 className="text-2xl mb-4">SwiftSupport Login</h1>
+        <div className="flex justify-center mb-6">
+          <img src={kareveLogo} alt="Kar·Eve Logo" className="h-16" />
+        </div>
+        <h1 className="text-2xl mb-4 text-center">SwiftSupport Login</h1>
         <input
           type="text"
           placeholder="Username"
