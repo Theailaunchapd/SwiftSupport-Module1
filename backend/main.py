@@ -3,7 +3,11 @@
 # Setup: Add DB_URL, SECRET_KEY to Replit Secrets. Run with uvicorn main:app --host 0.0.0.0 --port $PORT
 
 import os
+from pathlib import Path
 from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import psycopg2
@@ -21,12 +25,20 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Database connection (use Replit's Neon Postgres URL from Secrets)
-DB_URL = os.getenv("DB_URL")  # e.g., postgres://user:pass@host/db
+DB_URL = os.getenv("DATABASE_URL")  # e.g., postgres://user:pass@host/db
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key")  # For JWT
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 app = FastAPI(title="SwiftSupport AI API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Security: JWT Dependency
 security = HTTPBearer()
@@ -155,4 +167,4 @@ def health_check():
 if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8080))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host="localhost", port=port)

@@ -9,7 +9,7 @@ const App: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://your-backend-repl-url/users/login', { username, password });
+      const response = await axios.post('/api/users/login', { username, password });
       setMessage(`Token: ${response.data.access_token}`);
       // Store token in localStorage for auth
     } catch (error) {

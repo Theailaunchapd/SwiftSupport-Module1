@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pythonlibs/
+
+# Build outputs
+dist/
+build/
+*.pyc
+__pycache__/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Python
+*.egg-info/
+.eggs/
+*.egg
+
+# Cache
+.cache/
+.upm/
